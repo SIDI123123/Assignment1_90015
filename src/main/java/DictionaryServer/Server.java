@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 
+import DictionaryClient.Client;
 import org.json.JSONException;
 import org.json.JSONObject;
 public class Server {
@@ -25,13 +26,13 @@ public class Server {
 
         int i = 0;
         try {
-            if (args.length != 1) {
-                System.out.println("Insert port number");
+            if (args.length != 2) {
+                System.out.println("Insert port number and the path to the dictionary data.");
                 System.exit(1);
             } else {
                 Port = Integer.parseInt(args[0]);
-                db = new DictionaryDB();
-                dictionary = db.loadDictionary();
+                DictionaryDB.setPath(args[1]);
+                dictionary = DictionaryDB.loadDictionary();
                 server = new ServerSocket(Port);
             }
         } catch (IOException e) {
@@ -44,6 +45,7 @@ public class Server {
             Threadpool pool = new Threadpool(maxWorkers);
             while (true) {
                 System.out.println("Server port " + Port + " waiting for a client" );
+
                 client = server.accept();
                 i++;
                 System.out.println("Client no." + i + " Connected from "+ client.getRemoteSocketAddress());
@@ -102,7 +104,7 @@ public class Server {
             System.out.println("Error >> " + e.getMessage() + "\n");
         } finally {
             try {
-                db.updateDictionary(dictionary);
+                DictionaryDB.updateDictionary(dictionary);
                 if(client.isConnected()){
                     client.close();
                 }

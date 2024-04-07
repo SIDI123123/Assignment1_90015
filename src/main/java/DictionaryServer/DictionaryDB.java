@@ -7,10 +7,13 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 public class DictionaryDB {
-    static HashMap<String, ArrayList<String>> dictionary = new HashMap<String, ArrayList<String>>();
-    final static String filePath = "src/main/java/DictionaryServer/dic.txt";
+    public static HashMap<String, ArrayList<String>> dictionary = new HashMap<String, ArrayList<String>>();
+    private static String filePath = "src/main/java/DictionaryServer/dic.db";
 
-
+    public static void setPath(String _filePath)
+    {
+        filePath = _filePath;
+    }
     public static void updateDictionary(HashMap<String, ArrayList<String>> dictionary) throws IOException {
         File file = new File(filePath);
         BufferedWriter writer = null;;
@@ -39,14 +42,24 @@ public class DictionaryDB {
         }
     }
     public static HashMap<String, ArrayList<String>> loadDictionary() throws IOException {
-        File file = new File(filePath);
-        Scanner scan = new Scanner(file);
-        while (scan.hasNextLine()) {
-            String word = scan.next().trim();
-            String definition = scan.nextLine().trim();
-            ArrayList<String> defs = new ArrayList<String>(Arrays.asList(definition.split(";")));
-            dictionary.put(word, defs);
-        }scan.close();
+        try{
+            File file = new File(filePath);
+            if(!file.exists())
+            {
+                System.out.println("Dictionary file doesn't exist, fail to load");
+                System.exit(1);
+            }
+            Scanner scan = new Scanner(file);
+            while (scan.hasNextLine()) {
+                String word = scan.next().trim();
+                String definition = scan.nextLine().trim();
+                ArrayList<String> defs = new ArrayList<String>(Arrays.asList(definition.split(";")));
+                dictionary.put(word, defs);
+            }
+            scan.close();
+        }catch(IOException e){
+            e.getStackTrace();
+        }
         return dictionary;
     }
 

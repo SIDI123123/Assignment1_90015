@@ -1,6 +1,7 @@
 package DictionaryClient;
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
@@ -17,31 +18,30 @@ import org.json.JSONObject;
  */
 public class Client
 {
-    static ClientGUI objGUI = new ClientGUI();
-    static BufferedWriter writer;
-    static BufferedReader reader;
-    static String ip;
-    static int port;
+    private static ClientGUI objGUI = new ClientGUI();
+    private static BufferedWriter writer;
+    private static BufferedReader reader;
+    private static String ip;
+    private static int port;
     static Socket socket;
+    public static Object lock;
 
     static String errorMessage = "";
 
     public static void main(String []args)
     {
-        try
-        {
-            ip = args[0];
-            port = Integer.parseInt(args[1]);
 
-            objGUI.ClientWindow();
-            connect();
-//            objGUI.getIP(ip);
-//            objGUI.getPort(port);
-        }
-        catch(Exception e)
+        if (args.length != 2)
         {
             JOptionPane.showMessageDialog(null, "Please enter the 'Server address' followed by the 'Server port'.", "Connection Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
         }
+        ip = args[0];
+        port = Integer.parseInt(args[1]);
+
+        objGUI.ClientWindow();
+        connect();
+
     }
     public static void connect(){
         try
@@ -49,11 +49,9 @@ public class Client
             socket = new Socket(ip, port);
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(),"UTF-8"));
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
-
-        } catch (UnsupportedEncodingException e) {
+        } catch (IOException | NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Cannot connect to Server at Address: "+ip+" , Port: "+port, "Connection Error", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Cannot connect to Server at Address: "+ip+" , Port: "+port, "Connection Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
         }
     }
     public void disconnect()
@@ -76,7 +74,7 @@ public class Client
             }
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
     public String add(String word, String meaning)
@@ -105,11 +103,7 @@ public class Client
 //            writer.close();
 //            socket.close();
         }
-        catch (IOException e)
-        {
-            JOptionPane.showMessageDialog(null, "Cannot connect to Server at Address: "+ip+" , Port: "+port, "Connection Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch (JSONException e)
+        catch (IOException | JSONException | NullPointerException e)
         {
             JOptionPane.showMessageDialog(null, "Cannot connect to Server at Address: "+ip+" , Port: "+port, "Connection Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -144,11 +138,7 @@ public class Client
 //            writer.close();
 //            socket.close();
         }
-        catch (IOException e)
-        {
-            JOptionPane.showMessageDialog(null, "Cannot connect to Server at Address: "+ip+" , Port: "+port, "Connection Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch (JSONException e)
+        catch (IOException | JSONException | NullPointerException e)
         {
             JOptionPane.showMessageDialog(null, "Cannot connect to Server at Address: "+ip+" , Port: "+port, "Connection Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -185,11 +175,7 @@ public class Client
 //            writer.close();
 //            socket.close();
         }
-        catch (IOException e)
-        {
-            JOptionPane.showMessageDialog(null, "Cannot connect to Server at Address: "+ip+" , Port: "+port, "Connection Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch (JSONException e)
+        catch (IOException | JSONException | NullPointerException e)
         {
             JOptionPane.showMessageDialog(null, "Cannot connect to Server at Address: "+ip+" , Port: "+port, "Connection Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -223,11 +209,7 @@ public class Client
 //            socket.close();
 
         }
-        catch (IOException e)
-        {
-            JOptionPane.showMessageDialog(null, "Cannot connect to Server at Address: "+ip+" , Port: "+port, "Connection Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch (JSONException e)
+        catch (IOException | JSONException | NullPointerException e)
         {
             JOptionPane.showMessageDialog(null, "Cannot connect to Server at Address: "+ip+" , Port: "+port, "Connection Error", JOptionPane.ERROR_MESSAGE);
         }
