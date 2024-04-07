@@ -64,14 +64,17 @@ public class Client
             data.put("queryType", type);
             data.put("userWord","");
             data.put("meaning", "");
+            if(socket!=null && !socket.isClosed())
+            {
+                writer.write(data.toString());
+                writer.newLine();
+                writer.flush();
 
-            writer.write(data.toString());
-            writer.newLine();
-            writer.flush();
+                writer.close();
+                reader.close();
+                socket.close();
+            }
 
-            writer.close();
-            reader.close();
-            socket.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
