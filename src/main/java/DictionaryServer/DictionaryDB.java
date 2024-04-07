@@ -10,34 +10,32 @@ public class DictionaryDB {
     static HashMap<String, ArrayList<String>> dictionary = new HashMap<String, ArrayList<String>>();
     final static String filePath = "src/main/java/DictionaryServer/dic.txt";
 
-    public DictionaryDB() {
-    }
 
     public static void updateDictionary(HashMap<String, ArrayList<String>> dictionary) throws IOException {
         File file = new File(filePath);
-        BufferedWriter bf = null;;
+        BufferedWriter writer = null;;
         try{
-            bf = new BufferedWriter(new FileWriter(file));
+            writer = new BufferedWriter(new FileWriter(file));
 
             for(Map.Entry<String, ArrayList<String>> entry : dictionary.entrySet()){
-                bf.write( entry.getKey() + " ");
+                writer.write( entry.getKey() + " ");
                 for(int i = 0 ; i < entry.getValue().size() ; i++)
                 {
-                    bf.write(entry.getValue().get(i));
+                    writer.write(entry.getValue().get(i));
                     if(i != entry.getValue().size()-1)
                     {
-                        bf.write(";");
+                        writer.write(";");
                     }
                     else {
-                        bf.write("\n");
+                        writer.write("\n");
                     }
                 }
-            }bf.flush();
+            }writer.flush();
         }catch(IOException e){
             e.printStackTrace();
         }finally{
-            assert bf != null;
-            bf.close();
+            assert writer != null;
+            writer.close();
         }
     }
     public static HashMap<String, ArrayList<String>> loadDictionary() throws IOException {
@@ -52,10 +50,6 @@ public class DictionaryDB {
         return dictionary;
     }
 
-//    public HashMap<String, String> getDictionary() throws IOException {
-//        HashMap<String, String> dictionary = loadDictionary();
-//        return dictionary;
-//    }
 
 
 }
