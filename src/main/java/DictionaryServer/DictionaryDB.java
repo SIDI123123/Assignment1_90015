@@ -1,3 +1,7 @@
+/**
+ * Zicheng Jin
+ * 1511951
+ */
 package DictionaryServer;
 
 import java.io.File;

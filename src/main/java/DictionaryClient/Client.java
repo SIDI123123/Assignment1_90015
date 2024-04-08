@@ -1,3 +1,7 @@
+/**
+ * Zicheng Jin
+ * 1511951
+ */
 package DictionaryClient;
 
 import java.io.*;
@@ -8,23 +12,14 @@ import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Gets the <server-address> and <server-port>.
- * Invokes the client's user interface and gets
- * invoked when a button is pressed in the interface,
- * requests server on the basis of the press and gets
- * back the result to display them.
- *
- */
 public class Client
 {
-    private static ClientGUI objGUI = new ClientGUI();
     private static BufferedWriter writer;
     private static BufferedReader reader;
     private static String ip;
     private static int port;
     static Socket socket;
-    public static Object lock;
+
 
     static String errorMessage = "";
 
@@ -39,7 +34,7 @@ public class Client
         ip = args[0];
         port = Integer.parseInt(args[1]);
 
-        objGUI.ClientWindow();
+        ClientGUI.ClientWindow();
         connect();
 
     }
@@ -95,13 +90,7 @@ public class Client
 
             //to get results from the server
             addResult = reader.readLine();
-//            JSONObject addObj = new JSONObject(addResult);
-//            displayText = addObj.getString("display");
 
-            //Disconnecting
-//            reader.close();
-//            writer.close();
-//            socket.close();
         }
         catch (IOException | JSONException | NullPointerException e)
         {
@@ -130,13 +119,7 @@ public class Client
 
             //to get results from the server
             updateResult = reader.readLine();
-//            JSONObject addObj = new JSONObject(addResult);
-//            displayText = addObj.getString("display");
 
-            //Disconnecting
-//            reader.close();
-//            writer.close();
-//            socket.close();
         }
         catch (IOException | JSONException | NullPointerException e)
         {
@@ -167,13 +150,7 @@ public class Client
 
             //to get results from the server
             queryResult = reader.readLine();
-//            JSONObject queryObj = new JSONObject(queryResult);
-//            displayText = queryObj.getString("display");
 
-            //Disconnecting
-//            reader.close();
-//            writer.close();
-//            socket.close();
         }
         catch (IOException | JSONException | NullPointerException e)
         {
@@ -200,13 +177,7 @@ public class Client
 
             //to get results from the server
             removeResult = reader.readLine();
-//            JSONObject queryObj = new JSONObject(removeResult);
-//            displayText = queryObj.getString("display");
 
-            //Disconnecting
-//            reader.close();
-//            writer.close();
-//            socket.close();
 
         }
         catch (IOException | JSONException | NullPointerException e)

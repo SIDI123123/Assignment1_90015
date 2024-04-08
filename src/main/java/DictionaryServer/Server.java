@@ -1,3 +1,8 @@
+/**
+ * Zicheng Jin
+ * 1511951
+ */
+
 package DictionaryServer;
 
 import java.io.*;
@@ -19,7 +24,7 @@ public class Server {
     protected static Socket client;
     protected static String result;
     protected static DictionaryDB db;
-    protected static final int maxWorkers = 2;
+    protected static final int maxWorkers = 4;
 
     // initialize the server by creating socket and download dictionary file
     public static void main(String[] args) {
@@ -168,6 +173,7 @@ public class Server {
                     }
 
                 }
+                result += "Some meanings may not be updated. Because there are already same meanings existing";
             }
         }catch (Exception e) {
             result = "|Fail to add";

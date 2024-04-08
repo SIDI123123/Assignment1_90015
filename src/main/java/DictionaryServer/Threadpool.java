@@ -1,3 +1,7 @@
+/**
+ * Zicheng Jin
+ * 1511951
+ */
 package DictionaryServer;
 
 import java.net.Socket;
@@ -12,13 +16,14 @@ public class Threadpool {
     {
         maxWorkers = _maxWorkers;
         workerList = new ArrayList<Worker>();
+        taskList = new LinkedList<Task>();
         for(int i=0; i < maxWorkers; i++)
         {
             Worker worker = new Worker();
             workerList.add(worker);
             worker.start();
         }
-        taskList = new LinkedList<Task>();
+
     }
 
     public void execute(int _number, Socket _client)

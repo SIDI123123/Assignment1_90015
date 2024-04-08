@@ -1,3 +1,7 @@
+/**
+ * Zicheng Jin
+ * 1511951
+ */
 package DictionaryClient;
 
 import java.awt.EventQueue;
@@ -27,18 +31,6 @@ public class ClientGUI
     JFrame clientInterface;
     JTextField Word_textField;
 
-//    static String ip;
-//    static int port;
-//
-//    public void getIP(String ip)
-//    {
-//        this.ip = ip;
-//    }
-//    public void getPort(int port)
-//    {
-//        this.port = port;
-//    }
-
     public static void ClientWindow(){
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -66,7 +58,7 @@ public class ClientGUI
     private void initialize() {
         clientInterface = new JFrame();
         clientInterface.setTitle("Multi-threaded Dictionary Server");
-        clientInterface.setBounds(100, 100, 470, 320);
+        clientInterface.setBounds(100, 100, 550, 350);
 //        clientInterface.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         clientInterface.addWindowListener(new WindowAdapter() {
             @Override
@@ -78,7 +70,7 @@ public class ClientGUI
         });
 
         Word_textField = new JTextField();
-        Word_textField.setBounds(80, 6, 355, 26);
+        Word_textField.setBounds(80, 6, 445, 26);
         Word_textField.setColumns(10);
 
         JLabel lblWord = new JLabel("Word");
@@ -86,11 +78,11 @@ public class ClientGUI
 
         final JTextArea Meaning_textArea = new JTextArea();
         JScrollPane sp = new JScrollPane(Meaning_textArea);
-        sp.setBounds(80,77,355,130);
+        sp.setBounds(80,77,445,130);
         sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         Meaning_textArea.setWrapStyleWord(true);
         Meaning_textArea.setLineWrap(true);
-        Meaning_textArea.setBounds(80, 77, 355, 130);
+        Meaning_textArea.setBounds(80, 77, 445, 130);
 //        clientInterface.getContentPane().add(sp);
 
         JLabel lblNewLabel = new JLabel("Meaning");
@@ -98,11 +90,11 @@ public class ClientGUI
 
         final JTextArea Result_textArea = new JTextArea();
         JScrollPane sp1 = new JScrollPane(Result_textArea);
-        sp1.setBounds(80, 219, 355, 50);
+        sp1.setBounds(80, 219, 445, 80);
         sp1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         Result_textArea.setLineWrap(true);
         Result_textArea.setWrapStyleWord(true);
-        Result_textArea.setBounds(80, 219, 355, 50);
+        Result_textArea.setBounds(80, 219, 445, 80);
 //        clientInterface.getContentPane().add(sp1);
 
         JLabel lblNewLabel_1 = new JLabel("Result");
@@ -112,11 +104,11 @@ public class ClientGUI
         JButton btnQuery = new JButton("Query");
         btnQuery.setBounds(80, 40, 85, 29);
         JButton btnAdd = new JButton("Add");
-        btnAdd.setBounds(170, 40, 85, 29);
+        btnAdd.setBounds(200, 40, 85, 29);
         JButton btnRemove = new JButton("Remove");
-        btnRemove.setBounds(260, 40, 85, 29);
+        btnRemove.setBounds(320, 40, 85, 29);
         JButton btnUpdate = new JButton("Update");
-        btnUpdate.setBounds(350,40,85,29);
+        btnUpdate.setBounds(440,40,85,29);
 
 
         clientInterface.getContentPane().setLayout(null);
